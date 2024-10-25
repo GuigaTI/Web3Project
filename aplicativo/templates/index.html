@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %} Projeto Django {% endblock %}
+
+{% block main %}
+{% if messages %}
+{% for message in messages %} 
+<div class="alert alert-info" role="alert">
+{{ message }}
+</div>
+ {% endfor %} 
+ {% endif %}
+<div class="main-content">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-left">
+                <h1>Projeto</h1>
+                <p class="feio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora similique magni doloremque recusandae placeat non architecto laboriosam pariatur nihil, quis, earum eos commodi quo? Ab quidem consequuntur ipsa optio neque!.</p>
+                <p class="feio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora similique magni doloremque recusandae placeat non architecto laboriosam pariatur nihil, quis, earum eos commodi quo? Ab quidem consequuntur ipsa optio neque!.</p>
+                <p class="feio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora similique magni doloremque recusandae placeat non architecto laboriosam pariatur nihil, quis, earum eos commodi quo? Ab quidem consequuntur ipsa optio neque!.</p>
+                <p class="feio">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora similique magni doloremque recusandae placeat non architecto laboriosam pariatur nihil, quis, earum eos commodi quo? Ab quidem consequuntur ipsa optio neque!.</p> 
+                <a href="{% url 'cadastrar_user' %}" class="btn btn-primary botaoC">Cadastre-se</a>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'saturno.png' %}" alt="Descrição da Imagem" class="img-fluid">
+            </div>
+    </div>
+</div>
+{% endblock %}

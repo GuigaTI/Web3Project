@@ -1,0 +1,233 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow-x: hidden; /* Remove a rolagem horizontal */
+}
+
+.navbar {
+    background: linear-gradient(135deg, #6a0dad, #00f3ff); /* Gradiente roxo e azul */
+    margin: 0;
+    padding: 0;
+
+}
+
+.navbar .btn {
+    background-color: #00f3ff; /* Azul claro */
+    color: #1d1d1d; /* Cor do texto escura */
+    border: none; /* Remove a borda padrão */
+    padding: 8px 16px; /* Espaçamento interno */
+    border-radius: 5px; /* Cantos arredondados */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.navbar .btn:hover {
+    background-color: #1d1d1d; /* Cor escura ao passar o mouse */
+    color: #00f3ff; /* Texto azul claro ao passar o mouse */
+}
+
+.main-content {
+    flex: 1;
+    background-image: url('fundo.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-size: cover;
+    background-position: center;
+    padding: 0; /* Remove o padding se for necessário ajustar */
+    color: #fff; /* Cor do texto principal em branco */
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinha o conteúdo à esquerda */
+}
+.footer {
+    background: linear-gradient(135deg, #00f3ff, #6a0dad); /* Gradiente azul e roxo */
+    color: white; /* Cor do texto branco */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 5px; /* Ajuste o padding conforme necessário */
+    margin: 0;
+    text-align: center;
+    box-sizing: border-box; /* Inclui padding e bordas no cálculo da largura total */
+}
+
+.footer p {
+    margin: 0; /* Remove margens adicionais ao redor do texto */
+    padding: 0; /* Remove padding se houver */
+}
+
+.footer li{
+    list-style-type: none;
+}
+
+.footerTex{
+    color: #ffffff;
+}
+
+.footerL {
+    color: #ffffff; /* Cor desejada para os links */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: color 0.3s; /* Transição suave ao passar o mouse */
+}
+
+.footerL:hover {
+    color: #ffffff; /* Cor dos links ao passar o mouse */
+}
+
+.botaoC {
+    background: linear-gradient(135deg, #6a0dad, #00f3ff); /* Gradiente roxo e azul */
+    color: #fff; /* Cor do texto branco */
+    border: none; /* Remove a borda padrão */
+    padding: 12px 24px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    font-weight: bold; /* Texto em negrito */
+    font-size: 16px; /* Tamanho da fonte */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para um efeito de profundidade */
+    transition: all 0.3s ease; /* Transição suave para todas as propriedades */
+    margin-left: 10px; /* Espaçamento entre os botões */
+    display: inline-block; /* Garante que o botão seja um bloco inline */
+}
+
+.botaoC:hover {
+    background: linear-gradient(135deg, #00f3ff, #6a0dad); /* Inverte o gradiente ao passar o mouse */
+    color: #000; /* Cor do texto escura ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Intensifica a sombra ao passar o mouse */
+    text-decoration: none; /* Remove sublinhado ao passar o mouse */
+}
+
+h4 {
+    font-size: 2rem; /* Tamanho da fonte (ajuste conforme necessário) */
+    font-weight: bold; /* Negrito para destacar o texto */
+    background: linear-gradient(135deg,#00f3ff, #6a0dad); /* Gradiente roxo e azul */
+    -webkit-background-clip: text; /* Aplica o gradiente ao texto */
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Torna o texto transparente para exibir o gradiente */
+    text-shadow: 0 2px 5px rgba(122, 34, 236, 0.2), 0 0 3px rgba(73, 151, 182, 0.6); /* Sombra do texto */
+    margin: 0; /* Remove margens padrão se necessário */
+    padding: 10px 0; /* Adiciona padding ao redor do texto */
+}
+
+h1 {
+    font-size: 2rem; /* Tamanho da fonte (ajuste conforme necessário) */
+    font-weight: bold; /* Negrito para destacar o texto */
+    background: linear-gradient(135deg,#00f3ff, #6a0dad); /* Gradiente roxo e azul */
+    -webkit-background-clip: text; /* Aplica o gradiente ao texto */
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Torna o texto transparente para exibir o gradiente */
+    text-shadow: 0 2px 5px rgba(122, 34, 236, 0.2), 0 0 3px rgba(73, 151, 182, 0.6); /* Sombra do texto */
+    margin: 0; /* Remove margens padrão se necessário */
+    padding: 10px 0; /* Adiciona padding ao redor do texto */
+}
+.feio {
+    font-size: 1rem; /* Tamanho da fonte (ajuste conforme necessário) */
+    font-weight: bold; /* Negrito para destacar o texto */
+    background: linear-gradient(135deg, #49c4e29c,#00f3ff); /* Gradiente roxo e azul */
+    -webkit-background-clip: text; /* Aplica o gradiente ao texto */
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Torna o texto transparente para exibir o gradiente */
+    margin: 0; /* Remove margens padrão se necessário */
+    padding: 10px 0; /* Adiciona padding ao redor do texto */
+}
+
+.main-content img {
+    margin-left: 40%; /* Ajuste a margem conforme necessário */
+    border-radius: 8px; /* Adiciona cantos arredondados à imagem */
+}
+
+main {
+    flex: 1; /* Faz o conteúdo principal ocupar o espaço disponível */
+}
+
+.form-cadastro {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-cadastro input,
+.form-cadastro textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.botton-cadastro{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cardR {
+    background: rgba(168, 109, 211, 0.9); /* Gradiente roxo com opacidade */
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.9), rgba(0, 243, 255, 0.9)); /* Gradiente roxo e azul com opacidade */
+    color: #fff; /* Cor do texto branca */
+    border-radius: 10px; /* Cantos arredondados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+}
+
+.cardR:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Intensifica a sombra ao passar o mouse */
+}
+
+.cardR-title {
+    font-size: 1.5rem; /* Ajuste o tamanho do título */
+    font-weight: bold; /* Título em negrito */
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
+}
+
+.cardR-text {
+    font-size: 1rem; /* Tamanho do texto do card */
+    margin: 5px 0; /* Espaçamento vertical entre os parágrafos */
+}
+
+/* Alinhamento dos botões no lado direito */
+table td.text-center {
+    text-align: right; /* Alinha o conteúdo da célula à direita */
+}
+
+/* Aplicar opacidade às linhas da tabela */
+table tbody tr td {
+    background-color: rgba(255, 255, 255, 0.5); /* Fundo branco com 50% de opacidade */
+    color: #1d1d1d; /* Cor do texto para manter legível */
+}
+
+table th {
+    background: rgba(106, 13, 173, 0.8); /* Cabeçalho com opacidade ajustada */
+    color: #fff; /* Cor do texto */
+}
+
+.cardR {
+    background: rgba(168, 109, 211, 0.9); /* Gradiente roxo com opacidade */
+    background: linear-gradient(135deg, rgba(106, 13, 173, 0.9), rgba(0, 243, 255, 0.9)); /* Gradiente roxo e azul com opacidade */
+    color: #fff; /* Cor do texto branca */
+    border-radius: 10px; /* Cantos arredondados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
+}
+
+.cardR:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Intensifica a sombra ao passar o mouse */
+}
+
+.text-right {
+    display: flex;
+    justify-content: flex-end; /* Alinha o conteúdo ao final (direita) */
+}

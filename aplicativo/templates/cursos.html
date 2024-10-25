@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Cursos {% endblock %}
+
+{% block main %}
+<div style="display: flex; flex-wrap: wrap;">
+{% for cursos in dados %}
+<div class="cardR" style="width: 18rem; margin: 10px;">
+    <div class="card-body">
+        <h5 class="cardR-title">{{ cursos.nome }}</h5>
+        <p class="cardR-text">{{ cursos.autor }} - {{ cursos.duracao }}</p>
+        <p class="cardR-text">R$ {{ cursos.preco }}</p>
+      <a href="#" class="btn btn-primary botaoC"  style="display: block; margin: auto;">Comprar</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}
