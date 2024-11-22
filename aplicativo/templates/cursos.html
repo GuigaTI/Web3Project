@@ -5,12 +5,16 @@
 {% block main %}
 <div style="display: flex; flex-wrap: wrap;">
 {% for cursos in dados %}
-<div class="cardR" style="width: 18rem; margin: 10px;">
+  <div class="cardR" style="width: 18rem; margin: 10px;">
     <div class="card-body">
-        <h5 class="cardR-title">{{ cursos.nome }}</h5>
-        <p class="cardR-text">{{ cursos.autor }} - {{ cursos.duracao }}</p>
-        <p class="cardR-text">R$ {{ cursos.preco }}</p>
-      <a href="#" class="btn btn-primary botaoC"  style="display: block; margin: auto;">Comprar</a>
+      <!-- Imagem do curso -->
+      <img src="{{ cursos.imagem.url }}" class="card-img-top" alt="{{ cursos.nome }}" style="width: 100%; height: 150px; object-fit: cover; border-bottom: 2px solid #ddd;">
+
+      <h5 class="cardR-title">{{ cursos.nome }}</h5>
+      <p class="cardR-text">{{ cursos.autor }} - {{ cursos.duracao }}</p>
+      <p class="cardR-text">R$ {{ cursos.preco }}</p>
+      
+      <a href="#" class="btn btn-primary botaoC" style="display: block; margin: auto;">Comprar</a>
     </div>
   </div>
 {% endfor %}

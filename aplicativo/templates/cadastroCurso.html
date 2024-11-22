@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="text-left">
             <h1 class="mb-4">Novo Curso</h1>
-            <form action="{% url 'cadastrar_curso' %}" method="POST" class="form-cadastro">
+            <form action="{% url 'cadastrar_curso' %}" method="POST" class="form-cadastro"  enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label class="form-label">Nome do Curso</label>
@@ -25,6 +25,10 @@
                 <div class="mb-3">
                     <label class="form-label">Preço</label>
                     {{ form.preco }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_imagem" class="form-label">Imagem</label>
+                    <input type="file" name="imagem" id="id_imagem" class="form-control" accept="image/*" required>
                 </div>
                 <button type="submit" class="btn botaoC botton-cadastro">Cadastrar</button>
             </form>

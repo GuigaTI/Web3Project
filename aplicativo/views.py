@@ -1,10 +1,15 @@
 from datetime import timedelta
-from django.shortcuts import render
-from aplicativo.form_cadastro_user import FormCadastroUser,FormCadastroCurso,FormLogin
-from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.shortcuts import render,get_object_or_404,redirect
+from aplicativo.form_cadastro_user import FormCadastroUser,FormCadastroCurso,FormLogin,FormAlterarSenha,FotoForm
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib import messages
-from aplicativo.models import Usuario,Curso
+from aplicativo.models import Usuario,Curso,Foto
+from django.contrib.auth import get_user_model,update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.template import loader
+
+
 
 
 # Create your views here.
@@ -13,28 +18,23 @@ def home(request):
 
 
 def cadastrar_user(request):
-  novo_user = FormCadastroUser(request.POST or None)
+    novo_user = FormCadastroUser(request.POST, request.FILES)
 
-  #salvar usuario
-  if request.POST:
-     if novo_user.is_valid():
-        email = novo_user.cleaned_data['email']
-        senha = novo_user.cleaned_data['senha'] 
-
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        # Verificar se o e-mail já existe
         if Usuario.objects.filter(email=email).exists():
-         messages.error(request,"Usuario já existente")
-         return redirect('cadastrar_user')
-
-        novo_user.instance.senha = make_password(senha) 
-        novo_user.save()
-        messages.success(request,"Usuario criado com sucesso")
-        return redirect('home')
-  
-  context = {
-   'form' : novo_user
-  }
-  
-  return render(request,'cadastro.html',context)
+            messages.error(request, "E-mail já cadastrado.")
+        elif novo_user.is_valid():
+            user = novo_user.save(commit=False)
+            # Criptografar a senha usando make_password
+            user.senha = make_password(novo_user.cleaned_data['senha'])
+            user.save()
+            messages.success(request, "Usuário cadastrado com sucesso")
+            return redirect('home')
+    
+    context = {'form': novo_user}
+    return render(request, "cadastro.html", context)
 
 def exibir_usuario(request):
    usuarios = Usuario.objects.all().values()
@@ -45,20 +45,19 @@ def exibir_usuario(request):
    return render(request,'usuarios.html',context)
 
 def cadastrar_curso(request):
-  novo_curso = FormCadastroCurso(request.POST or None)
+    if request.method == 'POST':
+        # Instanciando o formulário com os dados do POST e o arquivo da imagem
+        form = FormCadastroCurso(request.POST, request.FILES)
+        
+        # Verificando se o formulário é válido
+        if form.is_valid():
+            form.save()  # Salvando o novo curso no banco de dados
+            messages.success(request, "Curso cadastrado com sucesso!")  # Mensagem de sucesso
+            return redirect('home')  # Redireciona para a página inicial
+    else:
+        form = FormCadastroCurso()  # Formulário vazio em caso de GET
 
-  #salvar curso
-  if request.POST:
-     if novo_curso.is_valid():
-        novo_curso.save()
-        messages.success(request,"Curso criado com sucesso")
-        return redirect('home')
-  
-  context = {
-   'form' : novo_curso
-  }
-  
-  return render(request,'cadastroCurso.html',context)
+    return render(request, 'cadastroCurso.html', {'form': form})
 
 def exibir_curso(request):
    cursos = Curso.objects.all().values()
@@ -78,7 +77,7 @@ def form_login(request):
          usuario = Usuario.objects.get(email = _email)      
          if check_password(_senha,usuario.senha):
             #Define o tempo da sessao em segundos
-            request.session.set_expiry(timedelta(seconds=60))
+            request.session.set_expiry(timedelta(seconds=1800))
             #Variacel de sessao
             request.session['email'] = _email
             messages.success(request,"Usuario logado com sucesso")
@@ -88,23 +87,27 @@ def form_login(request):
       except:
             messages.error(request, 'Usuario não encontrado!')
             return redirect('form_login')
-
+            
    context = {
       'form' : formLogin
    }
    return render(request,'form-login.html',context)
 
 def dashboard(request):
-   #Recupera a variavel de sessao
+    if 'email' not in request.session:
+        return redirect('form_login')
 
-   if 'email' not in request.session:
-      return redirect('home')
+    # Obtém o usuário logado
+    usuario_logado = Usuario.objects.get(email=request.session['email'])
 
-   email = request.session.get('email')
-   context = {
-      'username' : email
-   }
-   return render(request,'dashboard.html',context)
+    context = {
+        'usuario': usuario_logado,
+        'email': request.session['email'],
+    }
+
+    template = loader.get_template("dashboard.html")
+    return HttpResponse(template.render(context))
+
 
 def editar_usuario(request,id_usuario):
    usuario = Usuario.objects.get(id=id_usuario)
@@ -123,3 +126,40 @@ def excluir_usuario(request,id_usuario):
    usuario = Usuario.objects.get(id=id_usuario)
    usuario.delete()
    return redirect('exibir_usuario')
+
+def redefinir_senha(request, id_usuario):
+    user = get_object_or_404(Usuario, id=id_usuario)  # Obtém o usuário pelo ID
+    if request.method == 'POST':
+        form = FormAlterarSenha(user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Mantém o usuário logado
+            messages.success(request, 'Senha alterada com sucesso!')
+            return redirect('dashboard')  # Redirecione para a página desejada
+    else:
+        form = FormAlterarSenha(user)
+
+    return render(request, 'redefinir_senha.html', {'form': form, 'user': user})
+
+def criar_foto(request):
+    if request.method == 'POST':
+        form = FotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('galeria')
+    else:
+        form = FotoForm()  # Esse formulário será exibido em uma requisição GET
+
+    return render(request, 'criar_foto.html', {'form': form})
+
+def pagina_sucesso(request):
+    return render(request, 'pagina_sucesso.html')
+
+def mostrar_fotos(request):
+    fotos = Foto.objects.all()
+
+    context = {
+        'dados': fotos  
+        }
+
+    return render(request, "galeria.html", context)
