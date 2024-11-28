@@ -155,6 +155,7 @@ def criar_foto(request):
 def pagina_sucesso(request):
     return render(request, 'pagina_sucesso.html')
 
+#Mostra as fotos
 def mostrar_fotos(request):
     fotos = Foto.objects.all()
 
@@ -163,3 +164,4 @@ def mostrar_fotos(request):
         }
 
     return render(request, "galeria.html", context)
+
